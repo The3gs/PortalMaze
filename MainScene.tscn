@@ -1,6 +1,5 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Rooms/BaseRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/PortalShader.shader" type="Shader" id=2]
 [ext_resource path="res://MainScene.gd" type="Script" id=3]
 [ext_resource path="res://default_env.tres" type="Environment" id=4]
@@ -75,9 +74,6 @@ material/0 = SubResource( 10 )
 
 [node name="Current" type="Spatial" parent="."]
 
-[node name="BaseRoom" parent="Current" instance=ExtResource( 1 )]
-color = Color( 0.403922, 0.403922, 0.403922, 1 )
-
 [node name="North" type="Viewport" parent="."]
 size = Vector2( 100, 100 )
 own_world = true
@@ -85,9 +81,6 @@ keep_3d_linear = true
 
 [node name="Camera" type="Camera" parent="North"]
 environment = ExtResource( 4 )
-
-[node name="BaseRoom" parent="North" instance=ExtResource( 1 )]
-color = Color( 1, 0, 0, 1 )
 
 [node name="East" type="Viewport" parent="."]
 size = Vector2( 100, 100 )
@@ -97,9 +90,6 @@ keep_3d_linear = true
 [node name="Camera" type="Camera" parent="East"]
 environment = ExtResource( 4 )
 
-[node name="BaseRoom" parent="East" instance=ExtResource( 1 )]
-color = Color( 0, 0.109804, 1, 1 )
-
 [node name="South" type="Viewport" parent="."]
 size = Vector2( 100, 100 )
 own_world = true
@@ -107,9 +97,6 @@ keep_3d_linear = true
 
 [node name="Camera" type="Camera" parent="South"]
 environment = ExtResource( 4 )
-
-[node name="BaseRoom" parent="South" instance=ExtResource( 1 )]
-color = Color( 0.141176, 0.721569, 0, 1 )
 
 [node name="West" type="Viewport" parent="."]
 size = Vector2( 100, 100 )
@@ -119,9 +106,6 @@ keep_3d_linear = true
 [node name="Camera" type="Camera" parent="West"]
 environment = ExtResource( 4 )
 
-[node name="BaseRoom" parent="West" instance=ExtResource( 1 )]
-color = Color( 1, 0.984314, 0, 1 )
-
 [node name="CameraMount" type="KinematicBody" parent="."]
 
 [node name="Camera" type="Camera" parent="CameraMount"]
@@ -130,3 +114,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 [node name="CollisionShape" type="CollisionShape" parent="CameraMount"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1, 0 )
 shape = SubResource( 11 )
+
+[node name="GUI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentID" type="Label" parent="GUI"]
+margin_right = 40.0
+margin_bottom = 14.0

@@ -15,6 +15,13 @@ var speed = 1.5
 var center_size = 0.43
 
 var camera_captured = false
+
+var current_id = "A0"
+var north_id = ""
+var east_id = ""
+var south_id = ""
+var west_id = ""
+var gamedata: Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
     main_camera = $CameraMount/Camera
@@ -31,6 +38,13 @@ func _ready():
     
     get_tree().connect("screen_resized", self, "update_viewport_sizes")
     update_viewport_sizes()
+    
+    gamedata = preload("res://WorldData.gd").new()
+    
+    $Current.add_child(gamedata.map[current_id].create())
+    load_side(Sides.NORTH, Sides.SOUTH)
+    load_side(Sides.EAST, Sides.SOUTH)
+    load_side(Sides.WEST, Sides.SOUTH)
 
 func _input(event):
     if camera_captured and event is InputEventMouseMotion:
@@ -69,6 +83,8 @@ func _process(delta):
     
     for cam in all_cameras:
         cam.global_transform = main_camera.global_transform
+    
+    $GUI/CurrentID.text = current_id
 
 
 func update_viewport_sizes():
@@ -124,9 +140,9 @@ func update_cells(position: Vector3):
         if get_side(position) == last_side:
             return
         else:
-            swap_side(last_side)
-            self.last_side = get_side(position)
-            swap_side(last_side)
+            var next_side = get_side(position)
+            swap_side(next_side)
+            self.last_side = next_side
             return
     if get_direction(position) != last_direction:
         var last_dir = last_direction
@@ -187,36 +203,109 @@ func update_cells(position: Vector3):
         self.last_side = get_side(position)
 
 func load_side(side: int, from: int):
-    pass
+    var viewport: Node = null
+    var cell_id: String = ""
+    match side:
+        Sides.NORTH:
+            viewport = $North
+            match from:
+                Sides.EAST:
+                    cell_id = gamedata.map[current_id].north_west_id
+                Sides.SOUTH:
+                    cell_id = gamedata.map[current_id].north_id
+                Sides.WEST:
+                    cell_id = gamedata.map[current_id].north_east_id
+                _:
+                    printerr("Unknown side value: ", side)
+            north_id = cell_id
+        Sides.EAST:
+            viewport = $East
+            match from:
+                Sides.NORTH:
+                    cell_id = gamedata.map[current_id].south_east_id
+                Sides.SOUTH:
+                    cell_id = gamedata.map[current_id].north_east_id
+                Sides.WEST:
+                    cell_id = gamedata.map[current_id].east_id
+                _:
+                    printerr("Unknown side value: ", side)
+            east_id = cell_id
+        Sides.SOUTH:
+            viewport = $South
+            match from:
+                Sides.WEST:
+                    cell_id = gamedata.map[current_id].south_east_id
+                Sides.NORTH:
+                    cell_id = gamedata.map[current_id].south_id
+                Sides.EAST:
+                    cell_id = gamedata.map[current_id].south_west_id
+                _:
+                    printerr("Unknown side value: ", side)
+            south_id = cell_id
+        Sides.WEST:
+            viewport = $West
+            match from:
+                Sides.NORTH:
+                    cell_id = gamedata.map[current_id].south_west_id
+                Sides.EAST:
+                    cell_id = gamedata.map[current_id].west_id
+                Sides.SOUTH:
+                    cell_id = gamedata.map[current_id].north_west_id
+                _:
+                    printerr("Unknown side value: ", side)
+            west_id = cell_id
+        _:
+            printerr("Unknown side value: ", side)
+    if viewport == null or cell_id == "":
+        return
+    if viewport.get_child_count() > 1:
+        viewport.get_child(1).queue_free()
+    viewport.add_child(gamedata.map[cell_id].create())
+    #print("Loaded cell '", cell_id, "'")
 
 func swap_side(side: int):
     var old_current = $Current.get_child(0)
-    if side == Sides.NORTH:
-        var old_side = $North.get_child(1)
-        $Current.remove_child(old_current)
-        $North.remove_child(old_side)
-        $North.add_child(old_current)
-        $Current.add_child(old_side)
-    elif side == Sides.EAST:
-        var old_side = $East.get_child(1)
-        $Current.remove_child(old_current)
-        $East.remove_child(old_side)
-        $East.add_child(old_current)
-        $Current.add_child(old_side)
-    elif side == Sides.SOUTH:
-        var old_side = $South.get_child(1)
-        $Current.remove_child(old_current)
-        $South.remove_child(old_side)
-        $South.add_child(old_current)
-        $Current.add_child(old_side)
-    elif side == Sides.WEST:
-        var old_side = $West.get_child(1)
-        $Current.remove_child(old_current)
-        $West.remove_child(old_side)
-        $West.add_child(old_current)
-        $Current.add_child(old_side)
-    else:
-        printerr("Invalid side: ", side)
+    var from_viewport: Node = null
+    var to_viewport: Node = null
+    var old_curr_id = current_id
+    match side:
+        Sides.NORTH:
+            to_viewport = $North
+            current_id = north_id
+        Sides.EAST:
+            to_viewport = $East
+            current_id = east_id
+        Sides.SOUTH:
+            to_viewport = $South
+            current_id = south_id
+        Sides.WEST:
+            to_viewport = $West
+            current_id = west_id
+        _:
+            printerr("Invalid side: ", side)
+    match last_side:
+        Sides.NORTH:
+            from_viewport = $North
+            north_id = old_curr_id
+        Sides.EAST:
+            from_viewport = $East
+            east_id = old_curr_id
+        Sides.SOUTH:
+            from_viewport = $South
+            south_id = old_curr_id
+        Sides.WEST:
+            from_viewport = $West
+            west_id = old_curr_id
+        _:
+            printerr("Invalid side: ", side)
+    var old_side = to_viewport.get_child(1)
+    $Current.remove_child(old_current)
+    to_viewport.remove_child(old_side)
+    if from_viewport.get_child_count() > 1:
+        from_viewport.get_child(1).queue_free()
+    from_viewport.add_child(old_current)
+    $Current.add_child(old_side)
+    
 
 func get_side(position: Vector3):
     if abs(position.x) > abs(position.z):
