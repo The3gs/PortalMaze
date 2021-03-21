@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/twist_pillar.obj-da193f9921897886df80b2a3206c5dc0.mesh"
+
+[deps]
+
+files=[ "res://.import/twist_pillar.obj-da193f9921897886df80b2a3206c5dc0.mesh" ]
+
+source_file="res://Objects/Pillars/02_twist/twist_pillar.obj"
+dest_files=[ "res://.import/twist_pillar.obj-da193f9921897886df80b2a3206c5dc0.mesh", "res://.import/twist_pillar.obj-da193f9921897886df80b2a3206c5dc0.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

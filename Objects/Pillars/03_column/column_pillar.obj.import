@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/column_pillar.obj-0111dab12a0d21c07cd527ab4e3417d2.mesh"
+
+[deps]
+
+files=[ "res://.import/column_pillar.obj-0111dab12a0d21c07cd527ab4e3417d2.mesh" ]
+
+source_file="res://Objects/Pillars/03_column/column_pillar.obj"
+dest_files=[ "res://.import/column_pillar.obj-0111dab12a0d21c07cd527ab4e3417d2.mesh", "res://.import/column_pillar.obj-0111dab12a0d21c07cd527ab4e3417d2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

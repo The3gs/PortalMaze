@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/greek_pillar.obj-6505868f50e06888aaec7faa1e856214.mesh"
+
+[deps]
+
+files=[ "res://.import/greek_pillar.obj-6505868f50e06888aaec7faa1e856214.mesh" ]
+
+source_file="res://Objects/Pillars/05_greek/greek_pillar.obj"
+dest_files=[ "res://.import/greek_pillar.obj-6505868f50e06888aaec7faa1e856214.mesh", "res://.import/greek_pillar.obj-6505868f50e06888aaec7faa1e856214.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

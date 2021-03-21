@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/square_pillar.obj-52052350b6f64004bbed4ad668f85293.mesh"
+
+[deps]
+
+files=[ "res://.import/square_pillar.obj-52052350b6f64004bbed4ad668f85293.mesh" ]
+
+source_file="res://Objects/Pillars/04_square/square_pillar.obj"
+dest_files=[ "res://.import/square_pillar.obj-52052350b6f64004bbed4ad668f85293.mesh", "res://.import/square_pillar.obj-52052350b6f64004bbed4ad668f85293.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

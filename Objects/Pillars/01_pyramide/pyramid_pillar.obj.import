@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/pyramid_pillar.obj-1ec42f92a806577b93d0858ff028b09d.mesh"
+
+[deps]
+
+files=[ "res://.import/pyramid_pillar.obj-1ec42f92a806577b93d0858ff028b09d.mesh" ]
+
+source_file="res://Objects/Pillars/01_pyramide/pyramid_pillar.obj"
+dest_files=[ "res://.import/pyramid_pillar.obj-1ec42f92a806577b93d0858ff028b09d.mesh", "res://.import/pyramid_pillar.obj-1ec42f92a806577b93d0858ff028b09d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
