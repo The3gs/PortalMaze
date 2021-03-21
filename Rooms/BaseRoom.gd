@@ -14,13 +14,11 @@ func _ready():
     for child in $Art.get_children():
         panels.append(child)
     
-    
     var panel_material = SpatialMaterial.new()
     panel_material.albedo_color = color
+    panel_material.flags_unshaded = true
     for panel in panels:
         panel.material_override = panel_material
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+func set_parameters(parameters):
+    color = parameters
